@@ -7,9 +7,9 @@ $("#create-test").on("click", function () {
 });
 
 let tests = [
-  { exam: "Final", id: "1", result: "A", name: "Mobile Apps" },
-  { exam: "Final", id: "2", result: "C", name: "Physics" },
-  { exam: "Final", id: "3", result: "B", name: "Calculus" },
+  { exam: "Final", id: "1", result: "93", name: "Mobile Apps" },
+  { exam: "Final", id: "2", result: "78", name: "Check Point Project" },
+  { exam: "Final", id: "3", result: "89", name: "Capstone Project" },
 ];
 
 for (let i in tests) {
@@ -20,32 +20,24 @@ function addRow(obj) {
   let row = `<tr scope="row" class="test-row-${obj.id}">
               <td> ${obj.name} </td>
               <td> ${obj.exam} </td>
-              <td id="result-${obj.id}" data-testid="${obj.id}"> ${obj.result} </td>
+              <td class="flexCenter" id="result-${obj.id}" data-testid="${obj.id}"> ${obj.result} </td>
               <td>
-                <button class="btn 
-                  btn-sm 
-                  btn-danger" 
+                <button class="btn btn-sm btn-danger" 
                   data-testid="${obj.id}" 
                   id="delete-${obj.id}"> Delete 
                 </button>
 
-                <button class="btn 
-                  btn-sm 
-                  btn-info disabled" 
+                <button class="btn btn-sm btn-info disabled" 
                   data-testid="${obj.id}" 
                   id="save-${obj.id}"> Save 
                 </button>
                 
-                <button class="btn 
-                  btn-sm 
-                  btn-danger hidden" 
+                <button class="btn btn-sm btn-danger hidden" 
                   data-testid="${obj.id}" 
                   id="cancel-${obj.id}"> Cancel 
                 </button>
 
-                <button class="btn 
-                  btn-sm 
-                  btn-primary hidden" 
+                <button class="btn btn-sm btn-primary hidden" 
                   data-testid="${obj.id}" 
                   id="confirm-${obj.id}"> Confirm 
                 </button>
@@ -57,7 +49,7 @@ function addRow(obj) {
 
   // EVENT HANDLERS
   $(`#delete-${obj.id}`).on(`click`, deleteTest)
-  // $(`#save-${obj.id}`).on(`click`, saveUpdate);
+  $(`#save-${obj.id}`).on(`click`, saveUpdate);
   $(`#confirm-${obj.id}`).on(`click`, confirmDeletion);
   $(`#cancel-${obj.id}`).on(`click`, cancelDeletion);
 
@@ -81,14 +73,16 @@ function editResult() {
                   value="${value}">`)
   
   $(`.result`).on(`keyup`, function() {
-    const testid = $(this).data(`testid`);
-    const saveBtn = $(`#save-${testid}`);
+    let testid = $(this).data(`testid`);
+    let saveBtn = $(`#save-${testid}`);
     saveBtn.prop(`disabled`, false)
   });
 
 }
 
 function saveUpdate() {
+  console.log('Saved!')
+
   // USING DATA WITH OBJECT ID
   let testid = $(this).data(`testid`);
 
@@ -98,7 +92,7 @@ function saveUpdate() {
   saveBtn.prop(`disabled`, true)
   row.css("opacity", "0.5")
 
-  setTimeout(() => {
+  setTimeout(function() {
     row.css("opacity", "1")
   }, 2000)
 }
@@ -110,16 +104,16 @@ function deleteTest() {
   // CREATING VARIABLE TO USE THE OBJECT BY IS ID
   let deleteBtn = $(`#delete-${testid}`);
   let saveBtn = $(`#save-${testid}`);
-  let confirmBtn = $(`#confirm-${testid}`);
   let cancelBtn = $(`#cancel-${testid}`);
+  let confirmBtn = $(`#confirm-${testid}`);
 
   // ADDING A CLASS SO THAT I CAN USE THE ATTRIBUTE
   deleteBtn.addClass("hidden");
   saveBtn.addClass("hidden");
 
   // REMOVING A CLASS SO THAT I CAN USE THE ATTRIBUTE
-  confirmBtn.removeClass("hidden");
   cancelBtn.removeClass("hidden");
+  confirmBtn.removeClass("hidden");
 }
 
 function cancelDeletion() {
@@ -129,8 +123,8 @@ function cancelDeletion() {
   // CREATING VARIABLE TO USE THE OBJECT BY IS ID
   let deleteBtn = $(`#delete-${testid}`);
   let saveBtn = $(`#save-${testid}`);
-  let confirmBtn = $(`#confirm-${testid}`);
   let cancelBtn = $(`#cancel-${testid}`);
+  let confirmBtn = $(`#confirm-${testid}`);
 
   // REMOVING A CLASS SO THAT I CAN USE THE ATTRIBUTE
   deleteBtn.removeClass("hidden");
