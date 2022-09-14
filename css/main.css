@@ -1,13 +1,25 @@
 html, body { height: 100%;  width: 100%; }
 
-.container { height: 100%; width: 100%; }
+.container { padding-top: 1em; height: 100%; width: 100%; }
 
 .card-body {
   border-radius: 0;
 }
 
+.form-wrapper {
+  padding: 1em;
+}
+
 .hidden {
   display: none;
+}
+
+.btn, .form-control {
+  border-radius: 0;
+}
+
+.form-control {
+  margin-bottom: 10px;
 }
 
 table {
@@ -22,6 +34,7 @@ th, td {
 
 th {
   background-color: rgb(32, 33, 36);
+  padding: 0.5em 0;
 }
 
 tr:nth-child(odd) {
@@ -29,14 +42,17 @@ tr:nth-child(odd) {
 }
 
 td {
-  padding: 0 0 1em;
+  padding: 10px 0 11px;
 }
 
-.flexCenter {
+td.flexCenter {
   display: flex;
   justify-content: center;
 }
 
 .result {
   max-width: 80px;
+  text-align: center;
+  padding: 0;
+  width: 80px;
 }
