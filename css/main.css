@@ -56,3 +56,12 @@ td.flexCenter {
   padding: 0;
   width: 80px;
 }
+
+#add-to-table {
+  display: flex;
+  justify-content: flex-end;
+}
+
+tr > button.btn {
+  width: 75px;
+}

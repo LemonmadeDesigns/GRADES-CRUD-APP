@@ -1,49 +1,65 @@
-const newId = 4
-
-const newClass = { 'name': null, 'id': newId, 'exam': null, 'result': null }
-
-$('#add-class').on('click', function () {
-  $('.form-wrapper').removeClass('hidden')
-})
-
-$("#class-name").on("change", function () {
-  newClass.name = $(this).val();
-  console.log(newClass);
-});
-
-$("#class-exam").on("keyup", function () {
-  newClass.exam = $(this).val();
-  console.log(newClass);
-});
-
-$('#class-result').on('keyup', function () {
-  newClass.result = $(this).val();
-  console.log(newClass);
-});
-
-$('#create-class').on('click', function () {
-  if ( newClass.name == null ) {
-    alert( 'No Class Selected!' )
-  } else {
-    addRow(newClass)
-    $('#class-name').val('')
-    $('#class-exam').val('')
-    $('#class-result').val('')
-    $('.form-wrapper').addClass('hidden')
-  }
-});
+let newClass = { name: null, id: null, exam: null, result: null }
 
 // INPUT THAT DISPLAYS ON PAGE
 let classes = [
-  { exam: "Final", id: "1", result: "93", name: "Mobile Apps" },
-  { exam: "Final", id: "2", result: "78", name: "Check Point Project" },
-  { exam: "Final", id: "3", result: "89", name: "Capstone Project" },
+  { exam: "Final", id: 1, result: 93, name: "Mobile Apps" },
+  { exam: "Final", id: 2, result: 78, name: "Check Point Project" },
+  { exam: "Final", id: 3, result: 89, name: "Capstone Project" },
 ];
 
 // LOOP THROUGH EACH ROW USING ( for/in ) AND DISPLAYING RESULTS
 for (let i in classes) {
   addRow(classes[i]);
 }
+
+// |||||||||| EVENT LISTENERS STARTS |||||||||| // 
+
+// ONCE "ADD CLASS" BUTTON IS "clicked", FORM APPEARS 
+$('#add-class').on('click', function () {
+  $('.form-wrapper').removeClass('hidden')
+})
+
+// CONSOLE LOGS NAME ON "change"
+$("#class-name").on("change", function () {
+  newClass.name = $(this).val();
+  console.log(newClass);
+});
+
+// CONSOLE LOGS TYPE OF EXAM ON "keydown"
+$("#class-exam").on("keyup", function () {
+  newClass.exam = $(this).val();
+  console.log(newClass);
+});
+
+// CONSOLE LOGS GRADE RESULTS ON "keyup"
+$('#class-result').on('keyup', function () {
+  newClass.result = Number($(this).val());
+  console.log(newClass);
+});
+
+// ON "click", IF NO NAME IS SELECTED, ALERT MODAL APPEARS
+$('#create-class').on('click', function () {
+  if ( newClass.name == null ) {
+    alert( 'No Class Selected!' )
+  }
+  
+  // ELSE ADD THE ROW AND THE SET THE INPUT TO EMPTY VALUES
+  else {
+    const itemToAdd = { ...newClass, id: classes[classes.length - 1].id + 1 };
+    classes.push( itemToAdd );
+    
+    // ADD ROW AND LEAVE INPUT EMPTY 
+    addRow(itemToAdd)
+    $('#class-name').val('')
+    $('#class-exam').val('')
+    $('#class-result').val('')
+
+    // HIDE FORM AGAIN
+    $('.form-wrapper').addClass('hidden')
+  }
+});
+
+// |||||||||| EVENT LISTENERS ENDS |||||||||| // 
 
 // AND DISPLAY RESULTS
 function addRow(obj) {
@@ -76,14 +92,15 @@ function addRow(obj) {
               </td>
             </tr>`;
   
+  
+  // APPEND ROW TO TABLE
   $('#class-table').append(row)
 
-  // EVENT HANDLERS
+  // CALLING THE EVENT HANDLERS
   $(`#delete-${obj.id}`).on('click', deleteTest)
   $(`#save-${obj.id}`).on('click', saveUpdate);
   $(`#confirm-${obj.id}`).on('click', confirmDeletion);
   $(`#cancel-${obj.id}`).on('click', cancelDeletion);
-
   $(`#result-${obj.id}`).on('click', editResult);
 }
 
@@ -92,20 +109,23 @@ function editResult() {
   const testid = $(this).data('testid');
 
   // UPDATE VALUE OF INPUT
-  const value = $(this).html();
+  const value = $(`#result-${testid}`).val();
 
   // UNBIND BAD BEHAVIOR BY EDIT FEATURE
   $(this).unbind()
 
+  // UPDATED INPUT
   $(this).html(`<input 
-                  type="text" 
+                  type="number"
+                  id="result-${testid}"
                   class="result form-control"
                   data-testid="${testid}"
-                  value="${value}">`)
-  
+                  value="${value}">`);
+
+  // ON "keyup" EVENT UNDISABLED
   $(`.result`).on('keyup', function() {
-    let testid = $(this).data('testid');
-    let saveBtn = $(`#save-${testid}`);
+    let testid = $(this).data('testid')
+    let saveBtn = $(`#save-${testid}`)
     saveBtn.prop('disabled', false)
   });
 
@@ -118,13 +138,23 @@ function saveUpdate() {
 
   let saveBtn = $(`#save-${testid}`);
   let row = $(`.class-row-${testid}`);
+  console.table(row)
 
   // WHICH CLASS ID IS SAVED
   console.log(`Class ID#: ${testid}  Saved!`);
+  console.log($(`#result-${testid}`).html())
+    
+    // GRABBING VALUES AND UPDATES THE VALUE OF THE INPUT
+    const newValue = $(`input#result-${testid}`).val();
+    $(`#result-${testid}`).html(
+      `<td class="flexCenter" id="result-${testid}" data-testid="${testid}"> ${newValue} </td>`
+    );
 
+  // DISABLES SAVE BUTTON
   saveBtn.prop('disabled', true)
   row.css('opacity', '0.5')
 
+  // DISABLES THE INPUT AND SAVE BUTTON FOR 2 SECONDS
   setTimeout(function() {
     row.css('opacity', '1')
   }, 2000)
@@ -132,8 +162,11 @@ function saveUpdate() {
 
 function deleteTest() {
   // USING DATA WITH OBJECT ID
-  let testid = $(this).data('testid');
-
+  let testid = $(this).data("testid");
+  
+  // FILTERS THROUGH ARRAY AND REMOVE THE INPUT WITH SPECIFIC TEST ID
+  classes = classes.filter((obj) => obj.id !== testid);
+  
   // CREATING VARIABLE TO USE THE OBJECT BY IS ID
   let deleteBtn = $(`#delete-${testid}`);
   let saveBtn = $(`#save-${testid}`);
@@ -172,6 +205,7 @@ function confirmDeletion() {
   // USING DATA WITH OBJECT ID
   let testid = $(this).data('testid');
 
+  // CONFIRMS DELETION
   let row = $(`.class-row-${testid}`)
 
   // REMOVE ROWS USING REMOVE METHOD
