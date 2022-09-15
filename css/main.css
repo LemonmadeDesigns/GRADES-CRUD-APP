@@ -62,6 +62,6 @@ td.flexCenter {
   justify-content: flex-end;
 }
 
-tr > button.btn {
+td > button.btn {
   width: 75px;
 }

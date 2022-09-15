@@ -92,7 +92,6 @@ function addRow(obj) {
               </td>
             </tr>`;
   
-  
   // APPEND ROW TO TABLE
   $('#class-table').append(row)
 
