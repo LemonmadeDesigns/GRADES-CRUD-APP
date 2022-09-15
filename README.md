@@ -466,20 +466,20 @@ I know we covered a lot today, so make sure to take some time and go back over e
 - How can you implement DELETE methods into your projects?
 - In what ways can you modularize or improve the project thus far?
 
-<div style="position: relative; top: -5em; text-align: center;">
+<div style="">
 
-<div style="position: relative; left: -400px; top: 100px;">
-<img src="./imgs/CRUD.png" style="width: 300px; height: 300px;"
+<div style="text-align: center;">
+<img src="./imgs/CRUD.png" style="width: 500px; height: 300px;"
     alt="CRUD" />
 </div>
 
-<div style="position: relative; left: -100px; top: -150px;">
-<img src="./imgs/CRUD-Update.png" style="width: 300px; height: 300px;"
+<div style="text-align: center;">
+<img src="./imgs/CRUD-Update.png" style="width: 500px; height: 300px;"
     alt="CRUD-Update" />
 </div>
 
-<div style="position: relative; left: 200px; top: -400px;">
-<img src="./imgs/CRUD-Create.png" style="width: 300px; height: 300px;"
+<div style="text-align: center;">
+<img src="./imgs/CRUD-Create.png" style="width: 500px; height: 300px;"
     alt="CRUD-Create" />
 </div>
 
