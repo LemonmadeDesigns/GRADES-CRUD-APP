@@ -529,12 +529,12 @@ You can think about CRUD in this way:
 </div>
 
 <div style="text-align: center;">
-<img src="./imgs/CRUD-Update.png" style="width: 90%; height: 300px;"
+<img src="./imgs/CRUD-Update.png" style="width: 40%; height: 300px;"
     alt="CRUD-Update" />
 </div>
 
 <div style="text-align: center;">
-<img src="./imgs/CRUD-Create.png" style="width: 90%; height: 300px;"
+<img src="./imgs/CRUD-Create.png" style="width: 40%; height: 300px;"
     alt="CRUD-Create" />
 </div>
 
