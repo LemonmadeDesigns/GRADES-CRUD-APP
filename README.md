@@ -521,12 +521,12 @@ You can think about CRUD in this way:
 
 ---
 
-<div style="display: flex;">
-
 <div style="text-align: center;">
 <img src="./imgs/CRUD.png" style="width: 90%; height: 300px;"
     alt="CRUD" />
 </div>
+
+<div style="display: flex;">
 
 <div style="text-align: center;">
 <img src="./imgs/CRUD-Update.png" style="width: 40%; height: 300px;"
