@@ -1,7 +1,7 @@
 # Week 10 - SODA DINER CHECK POINT #
 
 <div style="position: relative; top: 0em; text-align: center;">
-<img src="./imgs/CRUD.png" style="width: 400px%;"
+<img src="./imgs/CRUD.png" style="width: 500px%;"
     alt="CRUD" />
 </div>
 
@@ -21,7 +21,6 @@ Week 10 - BASIC CRUD FUNCTIONALITY
 - [Sixth Step](#sixth-step)
 - [Seventh Step](#seventh-step)
 - [Eighth Step](#eighth-step)
-- [Setting Up the Front End Edit Functionality](#setting-up-the-front-end-edit-functionality)
 - [Final Thoughts](#final-thoughts)
 - [Review Questions](#review-questions)
 
@@ -75,6 +74,9 @@ Before we begin this lesson, let's grab our `/grades-crud-app` directory. Move i
 
 ## First Steps ##
 
+<details closed>
+<summary>Adding HTML</summary>
+<br>
 Before we can actually perform any CRUD action, we must first provide the user with a way to perform these operations. Let's start by adding a couple of buttons to the form that get rendered to the home page. Open up `js/main.js` file in your editor and add the following:
 
 ```html
@@ -169,9 +171,15 @@ Now we are going to add the <body></body> content to make sure that our code is 
 
 Pay particular attention to the difference between this `form` and the `movie-form.ejs` file from which it was initially copied. Discuss how the context works, starting with how it is sent from the controller.
 
+</details>
+
 ---
 
 ## Second Step ##
+
+<details closed>
+<summary>Adding JavaScript Functionality</summary>
+<br>
 
 ```javascript
 function addRow(obj) {
@@ -180,9 +188,9 @@ function addRow(obj) {
               <td> ${obj.exam} </td>
               <td class="flexCenter" id="result-${obj.id}" data-testid="${obj.id}"> ${obj.result} </td>
               <td>
-                <button class="btn btn-sm btn-danger" 
-                  data-testid="${obj.id}" 
-                  id="delete-${obj.id}"> Delete 
+                <button class="btn btn-sm btn-danger"
+                  data-testid="${obj.id}"
+                  id="delete-${obj.id}"> Delete
                 </button>
 
                 <button class="btn btn-sm btn-info" 
@@ -211,9 +219,15 @@ function addRow(obj) {
 > What do you think the significance of the `data-testid` attribute is?  
 >> Expect: These are data tags that allow a developer to pull information out of the HTML element itself.
 
+</details>
+
 ---
 
 ## Third Step ##
+
+<details closed>
+<summary>Adding CSS</summary>
+<br>
 
 Now let's add a little styling to this page to make it look good. Open up `css/main.css` in your editor and append the following rules:
 
@@ -288,6 +302,8 @@ td > button.btn {
 
 ```
 
+</details>
+
 ---
 
 Now reload the page in your browser and open up your dev tools to the console tab. Click the `Add Class` and `Delete` buttons a few times. What do you see? Why do you see this? There is a lot going on in the block of code above. Make sure you understand it before moving on. Ask questions about anything you don't understand.
@@ -300,7 +316,11 @@ Now reload the page in your browser and open up your dev tools to the console ta
 
 ## Fourth Step ##
 
-### Setting Up the Front End Edit Functionality ###
+<details closed>
+<summary> Adding Edit Functionality </summary>
+<br>
+
+### Setting Up the Edit Functionality ###
 
 ```js
 function editResult() {
@@ -331,11 +351,17 @@ function editResult() {
 }
 ```
 
+</details>
+
 ---
 
 ## Fifth Step ##
 
-### Setting Up the Front End Save Functionality ###
+<details closed>
+<summary> Adding Save Functionality </summary>
+<br>
+
+### Setting Up the Save Functionality ###
 
 ```js
 function saveUpdate() {
@@ -368,9 +394,15 @@ function saveUpdate() {
 }
 ```
 
+</details>
+
 ---
 
 ## Sixth Step ##
+
+<details closed>
+<summary> Adding Delete Functionality </summary>
+<br>
 
 ### Setting Up the Front End Delete Functionality ###
 
@@ -398,9 +430,15 @@ function deleteTest() {
 }
 ```
 
+</details>
+
 ---
 
 ## Seventh Step ##
+
+<details closed>
+<summary> Adding Cancel Functionality </summary>
+<br>
 
 ### Setting Up the Front End Cancel Functionality ###
 
@@ -425,11 +463,17 @@ function cancelDeletion() {
 }
 ```
 
+</details>
+
 ---
 
 ## Eighth Step ##
 
-### Setting Up the Front End Confiorm Functionality ###
+<details closed>
+<summary> Adding Confirm Functionality </summary>
+<br>
+
+### Setting Up the Front End Confirm Functionality ###
 
 ```js
 function confirmDeletion() {
@@ -444,6 +488,8 @@ function confirmDeletion() {
 }
 ```
 
+</details>
+
 ---
 
 ## Setting Up the Front End Functionality ##
@@ -456,6 +502,13 @@ Notice how similar this file is to `movie-form.js`. Discuss the differences you 
 
 I know we covered a lot today, so make sure to take some time and go back over everything we did. See if there are any ways you can improve upon the design. See if there are any interesting features you would like to add to the project, or if you can accomplish some of the same tasks in different ways. Remember, you know how to use jQuery and Bootstrap, both of which are used in this project. Next time we're going to really shift gears as we dive headfirst into React!
 
+You can think about CRUD in this way:
+
+- CREATE - You create an `Assignment` and populate in your informationion the dropdown
+- READ - You get access to the information you entered and people can `look at that context`
+- UPDATE - You get a grade and changed your `Grade` by clicking on the `numbers`
+- DELETE - You can delete the complete row
+
 ---
 
 ## Review Questions ##
@@ -466,20 +519,22 @@ I know we covered a lot today, so make sure to take some time and go back over e
 - How can you implement DELETE methods into your projects?
 - In what ways can you modularize or improve the project thus far?
 
-<div style="">
+---
+
+<div style="display: flex;">
 
 <div style="text-align: center;">
-<img src="./imgs/CRUD.png" style="width: 500px; height: 300px;"
+<img src="./imgs/CRUD.png" style="width: 90%; height: 300px;"
     alt="CRUD" />
 </div>
 
 <div style="text-align: center;">
-<img src="./imgs/CRUD-Update.png" style="width: 500px; height: 300px;"
+<img src="./imgs/CRUD-Update.png" style="width: 90%; height: 300px;"
     alt="CRUD-Update" />
 </div>
 
 <div style="text-align: center;">
-<img src="./imgs/CRUD-Create.png" style="width: 500px; height: 300px;"
+<img src="./imgs/CRUD-Create.png" style="width: 90%; height: 300px;"
     alt="CRUD-Create" />
 </div>
 
