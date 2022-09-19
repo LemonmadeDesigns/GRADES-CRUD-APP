@@ -1,8 +1,7 @@
 # Week 10 - SODA DINER CHECK POINT #
 
 <div style="position: relative; top: 0em; text-align: center;">
-<img src="./imgs/CRUD.png" style="width: 500px%;"
-    alt="CRUD" />
+<img src="./imgs/CRUD.png" style="width: 500px%;" alt="CRUD" />
 </div>
 
 Week 10 - BASIC CRUD FUNCTIONALITY
@@ -28,19 +27,19 @@ Week 10 - BASIC CRUD FUNCTIONALITY
 
 ## Reminder ##
 
-Please remember to start recording the RI session BEFORE the session begins. The check-in question should be present in the recording. Remind students that they are being recorded.
+Please remember to start recording the RI session <span style="color: red;">BEFORE</span> the session begins. The check-in question should be present in the recording. Remind students that they are being recorded.
 
 ---
 
 ## Instructor's Note ##
 
-This is a rather lengthy lesson plan. It may be necessary for you to limit side discussions as much as possible in order to set a good pace. That being said, make sure to answer any questions throroughly and completely while moving through the material.
+This is a not a lengthy lesson plan. However, it may still be necessary for you to limit side discussions as much as possible in order to set a good pace. That being said, make sure to answer any questions throroughly and completely while moving through the material.
 
 ---
 
 ## Background ##
 
-The students should have a working full-stack app that utilizes API calls and serves out templated HTML with EJS and Express. They should also have a database built on their local environment using MongoDB, and their app should be able to read and create documents with that database.
+The students should have a working full-stack app that utilizes API calls and serves out templated HTML with EJS and Express. They should also have a database built on their local environment using MongoDB, and their app should be able to read and create documents with that database. For that reason, here, we are going to focus on the CRUD functionality to give students a more clear and concise way to implement CRUD operations.
 
 ---
 
@@ -52,13 +51,15 @@ By the end of this session, learners will be able to:
 - Perform the READ method by reading data from a form
 - Perform the UPDATE method by updating data from a form
 - Perform the DELETE method by deleting data from a form
-- Creating front-end elements to handle the CRUD operations
+- Creating front-end elements to handle the CRUD operations using `jQuery`
 
 ---
 
 ## Glossary ##
 
 - `jQuery`:  jQuery is a concise and fast JavaScript library that can be used to simplify event handling, HTML document traversing, Ajax interactions and animation for speedy website development. jQuery simplifies the HTML's client-side scripting, thus simplifying Web 2.0 applications development.
+
+- `CRUD`: CRUD is an acronym that comes from the world of computer programming and refers to the four functions that are considered necessary to implement a persistent storage application: create, read, update and delete.
 
 ---
 
@@ -67,17 +68,36 @@ By the end of this session, learners will be able to:
 Before we begin this lesson, let's grab our `/grades-crud-app` directory. Move it to your `Documents` directory and initialize it as a git repository.
 
 ```bash
-  git clone </"ADD YOUR COPY OF THE REPO HERE">
+  > git clone </"ADD YOUR COPY OF THE REPO HERE">       
+  ## CLONES YOUR PROJECT 
+
+  > cd </"INTO THE FILE YOU JUST CLONED">      
+  ## CHANGES DIRECTORY
+
+  > git init       
+  ## INITIALIZE YOUR PROJECT
+
+  > git add .      
+  ## ADD ALL FILES TO YOUR COMMIT
+
+  > git commit -m "First commit"      
+  ## COMMITS YOUR PROJECT
+
+  > git push      
+  ## PUSHES YOUR PROJECT TO YOUR GET REPOSITORY
 ```
 
 ---
 
 ## First Steps ##
 
-<details closed>
+<details open>
 <summary>Adding HTML</summary>
 <br>
-Before we can actually perform any CRUD action, we must first provide the user with a way to perform these operations. Let's start by adding a couple of buttons to the form that get rendered to the home page. Open up `js/main.js` file in your editor and add the following:
+
+Before we can actually perform any CRUD action, we must first provide the user with a way to perform these operations. Let's start by adding a couple of buttons to the form that get rendered to the home page. Open up th `index.html` file in your editor and add the following:
+
+Now we are going to add the `<html></html>` content to make sure that our code is and can be connect to our page
 
 ```html
   <head>
@@ -88,8 +108,10 @@ Before we can actually perform any CRUD action, we must first provide the user w
     <title>Grade CRUD App</title>
 
     <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" 
+          crossorigin="anonymous">
 
     <!-- jQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -100,7 +122,7 @@ Before we can actually perform any CRUD action, we must first provide the user w
   </head>
 ```
 
-Now we are going to add the <body></body> content to make sure that our code is and can be connect to our page
+Now we are going to add the `<form></form>` in our `<body></body>` content to make sure that our code is and can be connect to our page
 
 ```html
 <body>
@@ -169,7 +191,7 @@ Now we are going to add the <body></body> content to make sure that our code is 
   </body>
 ```
 
-Pay particular attention to the difference between this `form` and the `movie-form.ejs` file from which it was initially copied. Discuss how the context works, starting with how it is sent from the controller.
+Pay particular attention to the difference between this `form` and the `movie-form.ejs` file from `Movie-Buzz` project. Discuss how the context works, starting with how it is sent from the form.
 
 </details>
 
@@ -177,9 +199,11 @@ Pay particular attention to the difference between this `form` and the `movie-fo
 
 ## Second Step ##
 
-<details closed>
-<summary>Adding JavaScript Functionality</summary>
+<details open>
+<summary>Adding Functionality To Loop</summary>
 <br>
+
+Here, we are going to create a form that the populate the objects value by the objects key. This will allow us to loop through each row and populate the table with CREATED data.
 
 ```javascript
 function addRow(obj) {
@@ -212,6 +236,16 @@ function addRow(obj) {
               </td>
             </tr>`;
 
+  // APPEND ROW TO TABLE
+  $('#class-table').append(row)
+
+  // CALLING THE EVENT HANDLERS
+  $(`#delete-${obj.id}`).on('click', deleteTest)
+  $(`#save-${obj.id}`).on('click', saveUpdate);
+  $(`#confirm-${obj.id}`).on('click', confirmDeletion);
+  $(`#cancel-${obj.id}`).on('click', cancelDeletion);
+  $(`#result-${obj.id}`).on('click', editResult);
+
 }
 ```
 
@@ -225,11 +259,11 @@ function addRow(obj) {
 
 ## Third Step ##
 
-<details closed>
+<details open>
 <summary>Adding CSS</summary>
 <br>
 
-Now let's add a little styling to this page to make it look good. Open up `css/main.css` in your editor and append the following rules:
+Now let's add a little styling to this page to make it look presentable. Open up `css/main.css` in your editor and append the following rules:
 
 ```css
 html, body { height: 100%;  width: 100%; }
@@ -306,17 +340,9 @@ td > button.btn {
 
 ---
 
-Now reload the page in your browser and open up your dev tools to the console tab. Click the `Add Class` and `Delete` buttons a few times. What do you see? Why do you see this? There is a lot going on in the block of code above. Make sure you understand it before moving on. Ask questions about anything you don't understand.
-
-> `Consider This`  
-> Why is there one event listener listening for all the button clicks on the `movies` element instead of individual listeners on each button?  
->> Expect: We're taking advantage of event bubbling in order to minimize the number of listeners present in our application because they consume resources. In addition, it will dynamically listen to every movie as they are added to the database.
-
----
-
 ## Fourth Step ##
 
-<details closed>
+<details open>
 <summary> Adding Edit Functionality </summary>
 <br>
 
@@ -341,7 +367,7 @@ function editResult() {
                   data-testid="${testid}"
                   value="${value}">`);
 
-  // ON "keyup" EVENT UNDISABLED
+  // ON "keyup" EVENT DISABLED
   $(`.result`).on('keyup', function() {
     let testid = $(this).data('testid')
     let saveBtn = $(`#save-${testid}`)
@@ -357,9 +383,13 @@ function editResult() {
 
 ## Fifth Step ##
 
-<details closed>
+<details open>
 <summary> Adding Save Functionality </summary>
 <br>
+
+> `Consider This`  
+> Why are we adding a `Save` button?  
+>> So that we can see when the item is saved to the form.
 
 ### Setting Up the Save Functionality ###
 
@@ -400,9 +430,17 @@ function saveUpdate() {
 
 ## Sixth Step ##
 
-<details closed>
+<details open>
 <summary> Adding Delete Functionality </summary>
 <br>
+
+---
+
+Now reload the page in your browser and open up your dev tools to the console tab. Click the `Delete` button a few times. What do you see? Why do you see this? There is a lot going on in the block of code above. Make sure you understand it before moving on. Ask questions about anything you don't understand.
+
+> `Consider This`  
+> Why is there individual event listeners on each button?  
+>> Because each button calls each event Listener by their function name.
 
 ### Setting Up the Front End Delete Functionality ###
 
@@ -436,7 +474,7 @@ function deleteTest() {
 
 ## Seventh Step ##
 
-<details closed>
+<details open>
 <summary> Adding Cancel Functionality </summary>
 <br>
 
@@ -469,7 +507,7 @@ function cancelDeletion() {
 
 ## Eighth Step ##
 
-<details closed>
+<details open>
 <summary> Adding Confirm Functionality </summary>
 <br>
 
@@ -494,20 +532,20 @@ function confirmDeletion() {
 
 ## Setting Up the Front End Functionality ##
 
-Notice how similar this file is to `movie-form.js`. Discuss the differences you see and why they are necessary. Make sure you understand everything going on here and take some time later to go over every detail.
+Notice how similar this file is to `movie-form.js` in `Movie-Buzz`. Discuss the differences you see and why they are necessary. Make sure you understand everything going on here and take some time later to go over every detail.
 
 ---
 
 ## Final Thoughts ##
 
-I know we covered a lot today, so make sure to take some time and go back over everything we did. See if there are any ways you can improve upon the design. See if there are any interesting features you would like to add to the project, or if you can accomplish some of the same tasks in different ways. Remember, you know how to use jQuery and Bootstrap, both of which are used in this project. Next time we're going to really shift gears as we dive headfirst into React!
+I know we covered a lot today, so make sure to take some time and go back over everything we did. See if there are any ways you can improve upon the design. See if there are any interesting features you would like to add to the project, or if you can accomplish some of the same tasks in different ways. Remember, you know how to use jQuery and Bootstrap, both of which are used in this project. Next time we're going to really shift gears as we dive head-first into React!
 
 You can think about CRUD in this way:
 
-- CREATE - You create an `Assignment` and populate in your informationion the dropdown
-- READ - You get access to the information you entered and people can `look at that context`
-- UPDATE - You get a grade and changed your `Grade` by clicking on the `numbers`
-- DELETE - You can delete the complete row
+- CREATE - You create an `Assignment` and populate your information in the dropdown
+- READ - You access the information you entered and people can `visualize the context`
+- UPDATE - You edit your `Grade` by clicking on the `numbers`
+- DELETE - You can delete the complete row by the delete button
 
 ---
 
@@ -521,20 +559,20 @@ You can think about CRUD in this way:
 
 ---
 
-<div style="text-align: center;">
+<!-- <div style="text-align: center;">
 <img src="./imgs/CRUD.png" style="width: 90%; height: 300px;"
     alt="CRUD" />
-</div>
+</div> -->
 
-<div style="display: flex;">
+<div style="display: flex; padding-top: 20px">
 
 <div style="text-align: center;">
-<img src="./imgs/CRUD-Update.png" style="width: 40%; height: 300px;"
+<img src="./imgs/CRUD-Update.png" style="width: 90%; height: 300px;"
     alt="CRUD-Update" />
 </div>
 
 <div style="text-align: center;">
-<img src="./imgs/CRUD-Create.png" style="width: 40%; height: 300px;"
+<img src="./imgs/CRUD-Create.png" style="width: 90%; height: 300px;"
     alt="CRUD-Create" />
 </div>
 

@@ -2,8 +2,8 @@ let newClass = { name: null, id: null, exam: null, result: null }
 
 // INPUT THAT DISPLAYS ON PAGE
 let classes = [
-  { exam: "Final", id: 1, result: 93, name: "Mobile Apps" },
-  { exam: "Final", id: 2, result: 78, name: "Check Point Project" },
+  { exam: "Final", id: 1, result: 93, name: "Check Point Project" },
+  { exam: "Final", id: 2, result: 758, name: "Exit Tickets" },
   { exam: "Final", id: 3, result: 89, name: "Capstone Project" },
 ];
 
